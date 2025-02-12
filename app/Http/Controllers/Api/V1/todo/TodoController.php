@@ -20,7 +20,7 @@ class TodoController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
-        return new TodoCollection($user->todos()->paginate());
+        return new TodoCollection($user->todos()->paginate($request->query("limit")));
     }
 
     /**

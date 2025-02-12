@@ -23,10 +23,14 @@ class LoginController extends Controller
             $user->tokens()->delete();
 
             // Generating new token
-            $newToken = $user->createToken('token')->plainTextToken;
+            $newToken = $user->createToken('token',['*'],now()->addWeek())->plainTextToken;
             return response()->json([
                 'token' => $newToken
             ],201);
+        }else{
+            return response()->json([
+                "message"=>"User not exist."
+            ],404);
         }
 
     }

@@ -28,7 +28,7 @@ class AuthRequest extends FormRequest
         $path = $this->path();
 
         return [
-            'name' => Rule::requiredIf($this->path() === "api/register"),
+            'name' => Rule::requiredIf($this->path() === "api/v1/register"),
             'email'=>['required','email'],
             'password'=>['required']
         ];

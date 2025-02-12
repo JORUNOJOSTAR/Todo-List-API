@@ -11,6 +11,13 @@ use Illuminate\Support\Facades\Hash;
 class RegisterController extends Controller
 {
     public function __invoke(AuthRequest $request){
+
+        if(User::where('email',$request->email)->first()){
+            return response()->json([
+                'message' => "User already existed."
+            ],400);
+        }
+
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
@@ -18,7 +25,7 @@ class RegisterController extends Controller
         $user->save();
 
         return response()->json([
-            'token' => $user->createToken('token')->plainTextToken
+            'token' => $user->createToken('token',['*'],now()->addWeek())->plainTextToken
         ],201);
     }
 }

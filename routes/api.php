@@ -36,7 +36,7 @@ Route::group(['prefix'=>'v1','namespace'=>'App\Http\Controllers\Api\V1\auth'],fu
   Route::post('/register',RegisterController::class);
 });
 
-Route::group(['prefix'=>'v1','namespace'=>'App\Http\Controllers\Api\V1\todo','middleware'=>'auth:sanctum'],function(){
+Route::group(['prefix'=>'v1','namespace'=>'App\Http\Controllers\Api\V1\todo','middleware'=>['auth:sanctum','throttle:api']],function(){
   Route::apiResource('todos',TodoController::class);
 });
 
