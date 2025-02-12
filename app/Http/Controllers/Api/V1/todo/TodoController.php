@@ -84,7 +84,7 @@ class TodoController extends Controller
         }
         $todo->delete();
         return response()->json([
-            "msg" => "Todo Deleted"
+            "message" => "Todo Deleted"
         ],204);
     }
 }
